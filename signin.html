@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkslateblue;
+    font-family: 'Open Sans', sans-serif;
+    min-width: 500px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 700px;
+    border-radius: 5px;
+    background-color: white;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+header {
+    width: 500px;
+    height: 100px;
+    background-color: #f7f7f7;
+    position: absolute;
+    top: 0px;
+    border-radius: 5px;
+}
+
+h2 {
+    text-align: center;
+    line-height: 100px;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.form {
+    padding: 30px 20px;
+}
+
+.form-container {
+    position: relative;
+    padding-bottom: 18px;
+    margin: 15px 5px;
+    top: 0px;
+}
+
+label {
+    display: block;
+    font-size: 20px;
+}
+
+input {
+    width: 430px;
+    height: 50px;
+    font-size: 18px;
+    padding: 5px;
+    outline: none;
+    border: 2px lightgray solid;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.form-container i {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    font-size: 20px;
+    visibility: hidden;
+}
+
+.form-container small {
+    position: absolute;
+    left: 0px;
+    top: 80px;
+    font-size: 15px;
+    margin-top: 5px;
+    visibility: hidden;
+}
+
+button {
+    text-align: center;
+    width: 450px;
+    background-color: darkslateblue;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    height: 50px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 40px;
+    border: none;
+    outline: none;
+}
+
+.form-container.success input {
+    border-color: rgb(42, 207, 48);
+}
+
+.form-container.success .fa-check-circle {
+    visibility: visible;
+    color: rgb(42, 207, 48);
+}
+
+.form-container.error input {
+    border-color: red;
+}
+
+.form-container.error .fa-exclamation-circle {
+    visibility: visible;
+    color: red;
+}
+
+.form-container.error small {
+    visibility: visible;
+    color: red;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h2>Create Account</h2>
+        </header>
+        <form class="form" id="form">
+            <div class="form-container">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-exclamation-circle"></i>
+                <small>Error Message</small>
+            </div>
+            <div class="form-container">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Enter email address">
+                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-exclamation-circle"></i>
+                <small>Error Message</small>
+            </div>
+            <div class="form-container">
+                <label for="password1">Password</label>
+                <input type="password" id="password1" placeholder="Enter password">
+                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-exclamation-circle"></i>
+                <small>Error Message</small>
+            </div>
+            <div class="form-container">
+                <label for="password2">Password Again</label>
+                <input type="password" id="password2" placeholder="Enter password again">
+                <i class="fa fa-check-circle"></i>
+                <i class="fa fa-exclamation-circle"></i>
+                <small>Error Message</small>
+            </div>
+            <a href="../Penfriend/index.html"><button type="submit">Submit</button></a>
+        </form>
+    </div>
+    <script>
+        //Selector
+var form = document.getElementById("form");
+var username = document.getElementById("username");
+var email = document.getElementById("email");
+var password1 = document.getElementById("password1");
+var password2 = document.getElementById("password2");
+var message = document.querySelector("small");
+
+//Event Handler
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    checkInput();
+});
+
+//Functions
+function checkInput() {
+    const usernameValue = username.value.trim();
+    const emailValue = email.value.trim();
+    const password1Value = password1.value.trim();
+    const password2Value = password2.value.trim();
+
+    if (usernameValue === "") {
+        showError(username, "Username cannot be blank");
+    } else if (!isUsernameValid(usernameValue)) {
+        showError(username, "Username is not valid");
+    } else {
+        showSuccess(username);
+    }
+
+    if (emailValue === "") {
+        showError(email, "Email cannot be blank");
+    } else if (!isEmailValid(emailValue)) {
+        showError(email, "Email is not valid");
+    } else {
+        showSuccess(email);
+    }
+
+    if (password1Value === "") {
+        showError(password1, "Password1 cannot be blank");
+    } else {
+        showSuccess(password1);
+    }
+
+    if (password2Value === "") {
+        showError(password2, "Password2 cannot be blank");
+    } else if (password2Value != password1Value) {
+        showError(password2, "Passwords do not match");
+    } else {
+        showSuccess(password2);
+    }
+}
+
+function showError(input, message) {
+    const formControl = input.parentNode;
+    formControl.className = "form-container error";
+    const small = formControl.querySelector("small");
+    small.innerHTML = message
+}
+
+function showSuccess(input) {
+    const formControl = input.parentNode;
+    formControl.className = "form-container success";
+}
+
+function isEmailValid(email) {
+    return /^([A-Za-z0-9\.\-\_]+)@([A-Za-z0-9]+)\.([A-Za-z]{2,3})$/.test(email);
+}
+
+function isUsernameValid(username) {
+    return /^([a-z0-9]+)$/.test(username);
+}
+    </script>
+</body>
+
+</html>
