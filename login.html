@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>Sign In</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
@@ -29,7 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 500px;
-    height: 430px;
+    height: 500px;
     border-radius: 5px;
     background-color: white;
     margin-top: 60px;
@@ -101,7 +101,7 @@ input {
 button {
     text-align: center;
     width: 450px;
-    background-color: rgb(3, 158, 3);
+    background-color: darkslateblue;
     color: white;
     font-size: 22px;
     font-weight: bold;
@@ -141,7 +141,7 @@ button {
 <body>
     <div class="container">
         <header>
-            <h2>Log In</h2>
+            <h2>Create Account</h2>
         </header>
         <form class="form" id="form">
             <div class="form-container">
@@ -158,25 +158,26 @@ button {
                 <i class="fa fa-exclamation-circle"></i>
                 <small>Error Message</small>
             </div>
-            <a href="../Penfriend/index.html"><button type="login">Log In</button></a>
+            <a href="../Penfriend/index.html"><button type="submit">Log In</button></a>
         </form>
     </div>
     <script>
         //Selector
 var form = document.getElementById("form");
+// var username = document.getElementById("username");
 var email = document.getElementById("email");
 var password1 = document.getElementById("password1");
+// var password2 = document.getElementById("password2");
 var message = document.querySelector("small");
 
 //Event Handler
-form.addEventListener("login", function(e) {
+form.addEventListener("submit", function(e) {
     e.preventDefault();
     checkInput();
 });
 
 //Functions
-function checkInput() 
-{
+function checkInput() {
     const emailValue = email.value.trim();
     const password1Value = password1.value.trim();
 
@@ -210,6 +211,7 @@ function showSuccess(input) {
 function isEmailValid(email) {
     return /^([A-Za-z0-9\.\-\_]+)@([A-Za-z0-9]+)\.([A-Za-z]{2,3})$/.test(email);
 }
+
     </script>
 </body>
 
